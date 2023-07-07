@@ -3,6 +3,7 @@
 { inputs, lib, config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   nixpkgs = {
@@ -113,6 +114,13 @@
 
   environment.systemPackages = with pkgs; [
   ];
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      byron = import ../home-manager;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

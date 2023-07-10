@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { inputs, lib, config, pkgs, ... }:
 
 {
@@ -40,12 +36,8 @@
   boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".device = "/dev/disk/by-uuid/20460e27-7b21-4bd2-a6ff-157f817882e8";
   boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".keyFile = "/crypto_keyfile.bin";
 
-  networking.hostName = "zen"; # Define your hostname.
+  networking.hostName = "zen";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -67,6 +59,7 @@
   services.xserver = {
     layout = "za";
     xkbVariant = "";
+    xkbOptions = "caps:escape";
   };
 
   # Enable CUPS to print documents.
@@ -98,10 +91,6 @@
     description = "byron";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
-      vim
-      git
-      gnome.gnome-tweaks
     ];
   };
 

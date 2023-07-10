@@ -1,5 +1,6 @@
 { inputs, lib, config, pkgs, ... }: {
   imports = [
+    ./dconf.nix
   ];
 
   nixpkgs = {
@@ -23,6 +24,7 @@
   };
 
   home.packages = with pkgs; [ 
+    dconf2nix
     firefox
     gnome.gnome-tweaks
     nixfmt

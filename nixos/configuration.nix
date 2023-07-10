@@ -60,6 +60,7 @@
     layout = "za";
     xkbVariant = "";
     xkbOptions = "caps:escape";
+    excludePackages = [ pkgs.xterm ];
   };
 
   # Enable CUPS to print documents.

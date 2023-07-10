@@ -24,7 +24,24 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.eog.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" ];
+      apps = [
+        "gnome-abrt.desktop"
+        "gnome-system-log.desktop"
+        "nm-connection-editor.desktop"
+        "org.gnome.baobab.desktop"
+        "org.gnome.Connections.desktop"
+        "org.gnome.DejaDup.desktop"
+        "org.gnome.Dictionary.desktop"
+        "org.gnome.DiskUtility.desktop"
+        "org.gnome.eog.desktop"
+        "org.gnome.Evince.desktop"
+        "org.gnome.FileRoller.desktop"
+        "org.gnome.fonts.desktop"
+        "org.gnome.seahorse.Application.desktop"
+        "org.gnome.tweaks.desktop"
+        "org.gnome.Usage.desktop"
+        "vinagre.desktop"
+      ];
       categories = [ "X-GNOME-Utilities" ];
       name = "X-GNOME-Utilities.directory";
       translate = true;
@@ -39,8 +56,10 @@ with lib.hm.gvariant;
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
+      picture-uri =
+        "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
+      picture-uri-dark =
+        "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
       primary-color = "#3071AE";
       secondary-color = "#000000";
     };
@@ -60,7 +79,12 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "gnome-power-panel" "org-gnome-console" "org-gnome-texteditor" "firefox" ];
+      application-children = [
+        "gnome-power-panel"
+        "org-gnome-console"
+        "org-gnome-texteditor"
+        "firefox"
+      ];
     };
 
     "org/gnome/desktop/notifications/application/firefox" = {
@@ -93,18 +117,15 @@ with lib.hm.gvariant;
     "org/gnome/desktop/screensaver" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
+      picture-uri =
+        "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
       primary-color = "#3071AE";
       secondary-color = "#000000";
     };
 
-    "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 720;
-    };
+    "org/gnome/desktop/session" = { idle-delay = mkUint32 720; };
 
-    "org/gnome/evolution-data-server" = {
-      migrated = true;
-    };
+    "org/gnome/evolution-data-server" = { migrated = true; };
 
     "org/gnome/file-roller/listing" = {
       list-mode = "as-folder";
@@ -148,17 +169,11 @@ with lib.hm.gvariant;
       sleep-inactive-ac-timeout = 7200;
     };
 
-    "org/gnome/shell" = {
-      welcome-dialog-last-shown-version = "44.2";
-    };
+    "org/gnome/shell" = { welcome-dialog-last-shown-version = "44.2"; };
 
-    "org/gnome/shell/world-clocks" = {
-      locations = "@av []";
-    };
+    "org/gnome/shell/world-clocks" = { locations = "@av []"; };
 
-    "org/gnome/tweaks" = {
-      show-extensions-notice = false;
-    };
+    "org/gnome/tweaks" = { show-extensions-notice = false; };
 
     "org/gtk/gtk4/settings/file-chooser" = {
       date-format = "regular";

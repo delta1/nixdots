@@ -1,7 +1,5 @@
 { inputs, lib, config, pkgs, ... }: {
-  imports = [
-    ./dconf.nix
-  ];
+  imports = [ ./dconf.nix ];
 
   nixpkgs = {
     overlays = [
@@ -23,7 +21,7 @@
     homeDirectory = "/home/byron";
   };
 
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     dconf2nix
     firefox
     gnome.gnome-tweaks

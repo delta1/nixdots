@@ -1,22 +1,20 @@
 { inputs, lib, config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
   nixpkgs = {
-    overlays = [];
-    config = {
-      allowUnfree = true;
-    };
+    overlays = [ ];
+    config = { allowUnfree = true; };
   };
 
   nix = {
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
+      config.nix.registry;
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
@@ -28,13 +26,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
+  boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
 
   # Enable swap on luks
-  boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".device = "/dev/disk/by-uuid/20460e27-7b21-4bd2-a6ff-157f817882e8";
-  boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".keyFile = "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".device =
+    "/dev/disk/by-uuid/20460e27-7b21-4bd2-a6ff-157f817882e8";
+  boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".keyFile =
+    "/crypto_keyfile.bin";
 
   networking.hostName = "zen";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -91,8 +89,7 @@
     isNormalUser = true;
     description = "byron";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
+    packages = with pkgs; [ ];
   };
 
   # Enable automatic login for the user.
@@ -108,10 +105,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -142,10 +140,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users = {
-      byron = import ../home-manager/home.nix;
-    };
+    users = { byron = import ../home-manager/home.nix; };
   };
-
 
 }

@@ -26,7 +26,7 @@
     firefox
     gnome.gnome-tweaks
     nixfmt
-    powerlevel10k
+    zsh-powerlevel10k
     ripgrep
     vscode
   ];
@@ -42,8 +42,7 @@
   programs.zsh = {
     enable = true;
     shellAliases = { };
-    promptInit =
-      "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    #promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   };
 
   # Nicely reload system units when changing configs

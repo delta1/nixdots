@@ -29,6 +29,7 @@
     gnome.gnome-tweaks
     nixfmt
     ripgrep
+    vscode
   ];
 
   programs.home-manager.enable = true;

@@ -33,7 +33,6 @@
     "/dev/disk/by-uuid/20460e27-7b21-4bd2-a6ff-157f817882e8";
   boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".keyFile =
     "/crypto_keyfile.bin";
-  environment.variables.EDITOR = "vim";
 
   networking.hostName = "zen";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -111,6 +110,11 @@
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       #  wget
     ];
+
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = [ pkgs.zsh ];
+  environment.variables.EDITOR = "vim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

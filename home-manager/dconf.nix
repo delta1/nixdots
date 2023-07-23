@@ -5,9 +5,30 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
+    "ca/desrt/dconf-editor" = {
+      saved-pathbar-path = "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type";
+      saved-view = "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type";
+      window-height = 500;
+      window-is-maximized = false;
+      window-width = 540;
+    };
+
     "org/gnome/Console" = {
-      font-scale = 1.2000000000000002;
+      font-scale = 1.2;
       last-window-size = mkTuple [ 972 673 ];
+    };
+
+    "org/gnome/Geary" = {
+      migrated-config = true;
+    };
+
+    "org/gnome/cheese" = {
+      burst-delay = 1000;
+      camera = "USB2.0 HD UVC WebCam (V4L2)";
+      photo-x-resolution = 1280;
+      photo-y-resolution = 720;
+      video-x-resolution = 1280;
+      video-y-resolution = 720;
     };
 
     "org/gnome/control-center" = {
@@ -24,24 +45,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [
-        "gnome-abrt.desktop"
-        "gnome-system-log.desktop"
-        "nm-connection-editor.desktop"
-        "org.gnome.baobab.desktop"
-        "org.gnome.Connections.desktop"
-        "org.gnome.DejaDup.desktop"
-        "org.gnome.Dictionary.desktop"
-        "org.gnome.DiskUtility.desktop"
-        "org.gnome.eog.desktop"
-        "org.gnome.Evince.desktop"
-        "org.gnome.FileRoller.desktop"
-        "org.gnome.fonts.desktop"
-        "org.gnome.seahorse.Application.desktop"
-        "org.gnome.tweaks.desktop"
-        "org.gnome.Usage.desktop"
-        "vinagre.desktop"
-      ];
+      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.eog.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" ];
       categories = [ "X-GNOME-Utilities" ];
       name = "X-GNOME-Utilities.directory";
       translate = true;
@@ -56,10 +60,8 @@ with lib.hm.gvariant;
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri =
-        "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
-      picture-uri-dark =
-        "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
       primary-color = "#3071AE";
       secondary-color = "#000000";
     };
@@ -79,16 +81,16 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [
-        "gnome-power-panel"
-        "org-gnome-console"
-        "org-gnome-texteditor"
-        "firefox"
-      ];
+      application-children = [ "gnome-power-panel" "org-gnome-console" "org-gnome-texteditor" "firefox" ];
+      show-in-lock-screen = false;
     };
 
     "org/gnome/desktop/notifications/application/firefox" = {
       application-id = "firefox.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/gnome-network-panel" = {
+      application-id = "gnome-network-panel.desktop";
     };
 
     "org/gnome/desktop/notifications/application/gnome-power-panel" = {
@@ -99,13 +101,17 @@ with lib.hm.gvariant;
       application-id = "org.gnome.Console.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-nautilus" = {
+      application-id = "org.gnome.Nautilus.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-gnome-texteditor" = {
       application-id = "org.gnome.TextEditor.desktop";
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
       natural-scroll = false;
-      speed = 0.23484848484848486;
+      speed = 0.234848;
       two-finger-scrolling-enabled = true;
     };
 
@@ -117,15 +123,27 @@ with lib.hm.gvariant;
     "org/gnome/desktop/screensaver" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri =
-        "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
       primary-color = "#3071AE";
       secondary-color = "#000000";
     };
 
-    "org/gnome/desktop/session" = { idle-delay = mkUint32 720; };
+    "org/gnome/desktop/session" = {
+      idle-delay = mkUint32 720;
+    };
 
-    "org/gnome/evolution-data-server" = { migrated = true; };
+    "org/gnome/epiphany" = {
+      ask-for-default = false;
+    };
+
+    "org/gnome/epiphany/state" = {
+      is-maximized = false;
+      window-size = mkTuple [ 1024 768 ];
+    };
+
+    "org/gnome/evolution-data-server" = {
+      migrated = true;
+    };
 
     "org/gnome/file-roller/listing" = {
       list-mode = "as-folder";
@@ -165,15 +183,30 @@ with lib.hm.gvariant;
       search-filter-time-type = "last_modified";
     };
 
-    "org/gnome/settings-daemon/plugins/power" = {
-      sleep-inactive-ac-timeout = 7200;
+    "org/gnome/nautilus/window-state" = {
+      initial-size = mkTuple [ 890 550 ];
     };
 
-    "org/gnome/shell" = { welcome-dialog-last-shown-version = "44.2"; };
+    "org/gnome/settings-daemon/plugins/power" = {
+      power-button-action = "hibernate";
+      sleep-inactive-ac-timeout = 7200;
+      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-battery-type = "hibernate";
+    };
 
-    "org/gnome/shell/world-clocks" = { locations = "@av []"; };
+    "org/gnome/shell" = {
+      favorite-apps = [ "firefox.desktop" "org.gnome.Console.desktop" "org.gnome.Music.desktop" "org.gnome.Photos.desktop" "org.gnome.Nautilus.desktop" ];
+      last-selected-power-profile = "performance";
+      welcome-dialog-last-shown-version = "44.2";
+    };
 
-    "org/gnome/tweaks" = { show-extensions-notice = false; };
+    "org/gnome/shell/world-clocks" = {
+      locations = "@av []";
+    };
+
+    "org/gnome/tweaks" = {
+      show-extensions-notice = false;
+    };
 
     "org/gtk/gtk4/settings/file-chooser" = {
       date-format = "regular";

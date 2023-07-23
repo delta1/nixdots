@@ -25,6 +25,7 @@
     dconf2nix
     firefox
     gnome.gnome-tweaks
+    gnome.dconf-editor
     nixfmt
     ripgrep
     vscode

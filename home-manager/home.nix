@@ -22,13 +22,23 @@
   };
 
   home.packages = with pkgs; [
+    appimage-run
+    atuin
     dconf2nix
     firefox
-    gnome.gnome-tweaks
     gnome.dconf-editor
+    gnome.gnome-tweaks
     nixfmt
     ripgrep
     vscode
+    #
+    libusb
+    udev
+    usbutils
+    python3
+    hwi
+    bitcoind
+    #elementsd #collision test_bitcoin
   ];
 
   programs.home-manager.enable = true;

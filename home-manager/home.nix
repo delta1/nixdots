@@ -30,6 +30,7 @@
     gnome.gnome-tweaks
     nixfmt
     ripgrep
+    signal-desktop
     vscode
     #
     libusb

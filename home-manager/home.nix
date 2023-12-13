@@ -3,11 +3,9 @@
 
   nixpkgs = {
     overlays = [
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      #(final: prev: {
+        #elementsd = prev.elementsd.overrideAttrs (_: { doCheck = false; });
+      #})
     ];
     config = {
       allowUnfree = true;

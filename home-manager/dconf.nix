@@ -60,8 +60,8 @@ with lib.hm.gvariant;
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
+      picture-uri = "file:///home/byron/.background-image";
+      picture-uri-dark = "file:///home/byron/.background-image";
       primary-color = "#3071AE";
       secondary-color = "#000000";
     };

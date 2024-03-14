@@ -40,6 +40,11 @@
     #elementsd #collision test_bitcoin
   ];
 
+  home.file.".bitcoin" = {
+    source = config.lib.file.mkOutOfStoreSymlink /mnt/data/bitcoin;
+    recursive = true;
+  };
+
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.neovim = {

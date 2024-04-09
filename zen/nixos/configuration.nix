@@ -1,41 +1,26 @@
-{ inputs, lib, config, pkgs, ... }:
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{ config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
-  ];
-
-  nixpkgs = {
-    overlays = [ ];
-    config = { allowUnfree = true; };
-  };
-
-  nix = {
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
-      config.nix.registry;
-    settings = {
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-  };
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Setup keyfile
-  boot.initrd.secrets = { "/crypto_keyfile.bin" = null; };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".device =
-    "/dev/disk/by-uuid/20460e27-7b21-4bd2-a6ff-157f817882e8";
-  boot.initrd.luks.devices."luks-20460e27-7b21-4bd2-a6ff-157f817882e8".keyFile =
-    "/crypto_keyfile.bin";
-
-  networking.hostName = "zen";
+  boot.initrd.luks.devices."luks-759a5353-150d-4725-8ef7-4ae70ee1d50b".device = "/dev/disk/by-uuid/759a5353-150d-4725-8ef7-4ae70ee1d50b";
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -55,10 +40,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "za";
+    layout = "us";
     xkbVariant = "";
-    xkbOptions = "caps:escape";
-    excludePackages = [ pkgs.xterm ];
   };
 
   # Enable CUPS to print documents.
@@ -85,12 +68,14 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.groups.dialout = {};
   users.users.byron = {
     isNormalUser = true;
     description = "byron";
-    extraGroups = [ "networkmanager" "wheel" "dialout" ];
-    packages = with pkgs; [ ];
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      firefox
+    #  thunderbird
+    ];
   };
 
   # Enable automatic login for the user.
@@ -102,21 +87,14 @@
   systemd.services."autovt@tty1".enable = false;
 
   # Allow unfree packages
-  #nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs;
-    [
-      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
-    ];
-
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = [ pkgs.zsh ];
-  environment.variables.EDITOR = "vim";
-  virtualisation.podman.enable = true;
+  environment.systemPackages = with pkgs; [
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -143,11 +121,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = { byron = import ../home-manager/home.nix; };
-  };
+  system.stateVersion = "23.11"; # Did you read the comment?
 
 }

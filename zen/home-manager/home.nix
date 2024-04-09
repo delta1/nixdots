@@ -28,14 +28,14 @@
     gnome.gnome-tweaks
     nixfmt
     ripgrep
-    signal-desktop
-    vscode
+    #signal-desktop
+    #vscode
     #
     libusb
     udev
     usbutils
     python3
-    hwi
+    #hwi
     bitcoind
     #elementsd #collision test_bitcoin
   ];

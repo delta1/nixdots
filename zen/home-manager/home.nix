@@ -1,10 +1,10 @@
 { inputs, lib, config, pkgs, ... }: {
-  imports = [ ./dconf.nix ];
+  imports = [ ./dconf.nix inputs.catppuccin.homeManagerModules.catppuccin ];
 
   nixpkgs = {
     overlays = [
       #(final: prev: {
-        #elementsd = prev.elementsd.overrideAttrs (_: { doCheck = false; });
+      #elementsd = prev.elementsd.overrideAttrs (_: { doCheck = false; });
       #})
     ];
     config = {
@@ -19,24 +19,29 @@
     homeDirectory = "/home/byron";
   };
 
+  home.file.".bitcoin" = {
+    source = config.lib.file.mkOutOfStoreSymlink /mnt/data/bitcoin;
+    recursive = true;
+  };
+
+  home.file.".background-image".source = ../../wallpapers/skull.png;
+
   home.packages = with pkgs; [
-    appimage-run
-    atuin
     bitcoind
     dconf2nix
     gnome.dconf-editor
     gnome.gnome-tweaks
     nixfmt
     ripgrep
-    #vscode
-    #signal-desktop
-
+    #atuin
+    #elementsd #collision test_bitcoin
+    #hwi
     #libusb
+    #python3
+    #signal-desktop
     #udev
     #usbutils
-    #python3
-    #hwi
-    #elementsd #collision test_bitcoin
+    #vscode
   ];
 
   programs.home-manager.enable = true;
@@ -47,12 +52,18 @@
   };
   programs.zsh = {
     enable = true;
-    shellAliases = { };
+    shellAliases = { open = "xdg-open"; };
     oh-my-zsh = {
-      enable = true;
+      enable = false;
       plugins = [ "git" ];
       theme = "robbyrussell";
     };
+  };
+
+  catppuccin.flavour = "mocha";
+  programs.starship = {
+    enable = true;
+    catppuccin.enable = true;
   };
 
   # Nicely reload system units when changing configs

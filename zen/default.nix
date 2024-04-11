@@ -1,6 +1,7 @@
 { inputs, lib, pkgs, ... }: {
   imports = [ 
     ./nixos/configuration.nix 
+    inputs.catppuccin.nixosModules.catppuccin
     inputs.home-manager.nixosModules.home-manager
   ];
 

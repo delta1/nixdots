@@ -16,8 +16,9 @@
       zen = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
-        modules = [ ./zen/nixos/configuration.nix ];
+        modules = [ ./zen ];
       };
     };
   };
+
 }

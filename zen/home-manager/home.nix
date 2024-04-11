@@ -22,36 +22,28 @@
   home.packages = with pkgs; [
     appimage-run
     atuin
+    bitcoind
     dconf2nix
-    firefox
     gnome.dconf-editor
     gnome.gnome-tweaks
     nixfmt
     ripgrep
-    #signal-desktop
     #vscode
-    #
-    libusb
-    udev
-    usbutils
-    python3
+    #signal-desktop
+
+    #libusb
+    #udev
+    #usbutils
+    #python3
     #hwi
-    bitcoind
     #elementsd #collision test_bitcoin
   ];
 
-  home.file.".bitcoin" = {
-    source = config.lib.file.mkOutOfStoreSymlink /mnt/data/bitcoin;
-    recursive = true;
-  };
-
   programs.home-manager.enable = true;
-  programs.git.enable = true;
-  programs.neovim = {
+  programs.git = {
     enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
+    userName = "Byron Hambly";
+    userEmail = "byron@hambly.dev";
   };
   programs.zsh = {
     enable = true;
@@ -67,5 +59,5 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }

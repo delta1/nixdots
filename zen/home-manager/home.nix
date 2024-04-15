@@ -29,6 +29,7 @@
   home.packages = with pkgs; [
     bitcoind
     dconf2nix
+    fzf
     gnome.dconf-editor
     gnome.gnome-tweaks
     nixfmt
@@ -58,6 +59,10 @@
       plugins = [ "git" ];
       theme = "robbyrussell";
     };
+    initExtra = ''
+      source "$(fzf-share)/key-bindings.zsh"
+      source "$(fzf-share)/completion.zsh"
+    '';
   };
 
   catppuccin.flavour = "mocha";

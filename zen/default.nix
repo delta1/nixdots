@@ -24,7 +24,7 @@
     vimAlias = true;
   };
   programs.zsh.enable = true;
-  services.xserver.xkbOptions = "caps:escape";
+  services.xserver.xkb.options = "caps:escape";
   services.xserver.excludePackages = [ pkgs.xterm ];
   users.defaultUserShell = pkgs.zsh;
 

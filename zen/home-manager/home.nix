@@ -1,5 +1,5 @@
 { inputs, lib, config, pkgs, ... }: {
-  imports = [ ./dconf.nix inputs.catppuccin.homeManagerModules.catppuccin ];
+  imports = [ ./dconf.nix inputs.catppuccin.homeModules.catppuccin ];
 
   nixpkgs = {
     overlays = [
@@ -28,12 +28,14 @@
 
   home.packages = with pkgs; [
     bitcoind
+    delta
     dconf2nix
     fzf
-    gnome.dconf-editor
-    gnome.gnome-tweaks
-    nixfmt
+    dconf-editor
+    gnome-tweaks
+    nixfmt-rfc-style
     ripgrep
+    starship
     #atuin
     #elementsd #collision test_bitcoin
     #hwi
@@ -42,14 +44,16 @@
     #signal-desktop
     #udev
     #usbutils
-    #vscode
+    vscode
   ];
 
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "Byron Hambly";
-    userEmail = "byron@hambly.dev";
+    settings.user = {
+      name = "Byron Hambly";
+      email = "byron@hambly.dev";
+    };
   };
   programs.zsh = {
     enable = true;
@@ -59,17 +63,15 @@
       plugins = [ "git" ];
       theme = "robbyrussell";
     };
-    initExtra = ''
+    initContent = ''
       source "$(fzf-share)/key-bindings.zsh"
       source "$(fzf-share)/completion.zsh"
     '';
   };
+  #programs.delta.enable = true;
 
-  catppuccin.flavour = "mocha";
-  programs.starship = {
-    enable = true;
-    catppuccin.enable = true;
-  };
+  catppuccin.flavor = "mocha";
+  catppuccin.starship.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

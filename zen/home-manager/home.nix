@@ -1,5 +1,15 @@
-{ inputs, lib, config, pkgs, ... }: {
-  imports = [ ./dconf.nix inputs.catppuccin.homeModules.catppuccin ];
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./dconf.nix
+    inputs.catppuccin.homeModules.catppuccin
+  ];
 
   nixpkgs = {
     overlays = [
@@ -33,9 +43,11 @@
     fzf
     dconf-editor
     gnome-tweaks
+    meslo-lgs-nf
     nixfmt-rfc-style
     ripgrep
-    starship
+    #starship
+    tor
     #atuin
     #elementsd #collision test_bitcoin
     #hwi
@@ -45,6 +57,7 @@
     #udev
     #usbutils
     vscode
+    zsh-powerlevel10k
   ];
 
   programs.home-manager.enable = true;
@@ -57,7 +70,9 @@
   };
   programs.zsh = {
     enable = true;
-    shellAliases = { open = "xdg-open"; };
+    shellAliases = {
+      open = "xdg-open";
+    };
     oh-my-zsh = {
       enable = false;
       plugins = [ "git" ];
@@ -66,12 +81,18 @@
     initContent = ''
       source "$(fzf-share)/key-bindings.zsh"
       source "$(fzf-share)/completion.zsh"
+      source ~/.p10k.zsh
     '';
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
   };
-  #programs.delta.enable = true;
 
   catppuccin.flavor = "mocha";
-  catppuccin.starship.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

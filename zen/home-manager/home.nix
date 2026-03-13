@@ -34,7 +34,7 @@
     recursive = true;
   };
 
-  home.file.".background-image".source = ../../wallpapers/skull.png;
+  home.file.".background-image".source = ../../wallpapers/purple.jpg;
 
   home.packages = with pkgs; [
     bitcoind
